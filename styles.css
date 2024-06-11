@@ -1,20 +1,35 @@
 body {
-  background-color: #0a0a23;
+  background-color: #000;
 }
 
+.press-start-2p-regular {
+  font-family: "Press Start 2P", system-ui;
+  font-weight: 400;
+  font-style: normal;
+}
+
+
 #text {
-  background-color: #0a0a23;
-  color: #ffffff;
+  background-color: #000;
+  color: #fff;
   padding: 10px;
+  font-family: "Press Start 2P";
+  font-size: small;
 }
 
 #game {
   max-width: 500px;
-  max-height: 400px;
+  max-height: 500px;
   background-color: #ffffff;
   color: #ffffff;
   margin: 30px auto 0px;
   padding: 10px;
+}
+
+#visual {
+  width: 500px;
+  height: 250px;
+  background-color: red;
 }
 
 #controls,
@@ -22,6 +37,8 @@ body {
   border: 1px solid #0a0a23;
   padding: 5px;
   color: #0a0a23;
+  font-family: "Press Start 2P";
+  font-size: small;
 }
 
 #monsterStats {
@@ -30,6 +47,8 @@ body {
   padding: 5px;
   color: #ffffff;
   background-color: #c70d0d;
+  font-family: "Press Start 2P";
+  font-size: small;
 }
 
 .stat {
@@ -42,4 +61,8 @@ button {
   background-color: #feac32;
   background-image: linear-gradient(#fecc4c, #ffac33);
   border: 3px solid #feac32;
+  font-family: "Press Start 2P";
+  font-size: x-small;
+  padding: 5px;
+  margin: 3px;
 }
