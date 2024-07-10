@@ -17,6 +17,7 @@ const monsterStats = document.querySelector("#monsterStats");
 const monsterName = document.querySelector("#monsterName");
 const monsterHealthText = document.querySelector("#monsterHealth");
 const visual = document.querySelector("#visual")
+const defaultImg = document.querySelector("#defaultImg")
 
 const townImg = document.createElement("img");
 townImg.src = "./images/town-square-cropped.jpg";
@@ -132,13 +133,16 @@ function update(location) {
   button3.onclick = location["button functions"][2];
   text.innerHTML = location.text;
   if (location.image) {
+    defaultImg.style.display = "none";
     visual.innerHTML = "";
     visual.appendChild(location.image);
-  } else if (fighting !== undefined) {
+    } else if (fighting !== undefined) {
+    defaultImg.style.display = "none";
     visual.innerHTML = "";
     visual.appendChild(monsters[fighting].image)
-  } else {
-    visual.innerHTML = "";
+    } else {
+      visual.innerHTML = "";
+      defaultImg.style.display = "block";
   }
 }
 
