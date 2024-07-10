@@ -16,6 +16,22 @@ const goldText = document.querySelector("#goldText");
 const monsterStats = document.querySelector("#monsterStats");
 const monsterName = document.querySelector("#monsterName");
 const monsterHealthText = document.querySelector("#monsterHealth");
+const visual = document.querySelector("#visual")
+
+const townImg = document.createElement("img");
+townImg.src = "./images/town-square-cropped.jpg";
+const storeImg = document.createElement("img");
+storeImg.src = "./images/store-cropped.jpg";
+const caveImg = document.createElement("img");
+caveImg.src = "./images/cave-cropped.jpg";
+const slimeImg = document.createElement("img");
+slimeImg.src = "./images/slime-cropped.jpg";
+const fangedImg = document.createElement("img");
+fangedImg.src = "./images/fanged-beast-cropped.jpg";
+const dragonImg = document.createElement("img");
+dragonImg.src = "./images/dragon-cropped.jpg";
+
+
 const weapons = [
   { name: 'stick', power: 5 },
   { name: 'dagger', power: 30 },
@@ -26,17 +42,20 @@ const monsters = [
   {
     name: "slime",
     level: 2,
-    health: 15
+    health: 15,
+    image: slimeImg
   },
   {
     name: "fanged beast",
     level: 8,
-    health: 60
+    health: 60,
+    image: fangedImg
   },
   {
     name: "dragon",
     level: 20,
-    health: 300
+    health: 300,
+    image: dragonImg
   }
 ]
 const locations = [
@@ -44,49 +63,57 @@ const locations = [
     name: "town square",
     "button text": ["Go to store", "Go to cave", "Fight dragon"],
     "button functions": [goStore, goCave, fightDragon],
-    text: "You are in the town square. You see a sign that says \"Store\"."
+    text: "You are in the town square. You see a sign that says \"Store\".",
+    image: townImg
   },
   {
     name: "store",
     "button text": ["Buy 10 health (10 gold)", "Buy weapon (30 gold)", "Go to town square"],
     "button functions": [buyHealth, buyWeapon, goTown],
-    text: "You enter the store."
+    text: "You enter the store.",
+    image: storeImg
   },
   {
     name: "cave",
     "button text": ["Fight slime", "Fight fanged beast", "Go to town square"],
     "button functions": [fightSlime, fightBeast, goTown],
-    text: "You enter the cave. You see some monsters."
+    text: "You enter the cave. You see some monsters.",
+    image: caveImg
   },
   {
     name: "fight",
     "button text": ["Attack", "Dodge", "Run"],
     "button functions": [attack, dodge, goTown],
-    text: "You are fighting a monster."
+    text: "You are fighting a monster.",
+    image: null
   },
   {
     name: "kill monster",
     "button text": ["Go to town square", "Go to town square", "Go to town square"],
     "button functions": [goTown, goTown, goTown],
-    text: 'The monster screams "Arg!" as it dies. You gain experience points and find gold.'
+    text: 'The monster screams "Arg!" as it dies. You gain experience points and find gold.',
+    image: null
   },
   {
     name: "lose",
     "button text": ["REPLAY?", "REPLAY?", "REPLAY?"],
     "button functions": [restart, restart, restart],
-    text: "You die. &#x2620;"
+    text: "You die. &#x2620;",
+    image: null
   },
   { 
     name: "win", 
     "button text": ["REPLAY?", "REPLAY?", "REPLAY?"], 
     "button functions": [restart, restart, restart], 
-    text: "You defeat the dragon! YOU WIN THE GAME! &#x1F389;" 
+    text: "You defeat the dragon! YOU WIN THE GAME! &#x1F389;",
+    image: null
   },
   {
     name: "easter egg",
     "button text": ["2", "8", "Go to town square?"],
     "button functions": [pickTwo, pickEight, goTown],
-    text: "You find a secret game. Pick a number above. Ten numbers will be randomly chosen between 0 and 10. If the number you choose matches one of the random numbers, you win!"
+    text: "You find a secret game. Pick a number above. Ten numbers will be randomly chosen between 0 and 10. If the number you choose matches one of the random numbers, you win!",
+    image: null
   }
 ];
 
@@ -104,6 +131,15 @@ function update(location) {
   button2.onclick = location["button functions"][1];
   button3.onclick = location["button functions"][2];
   text.innerHTML = location.text;
+  if (location.image) {
+    visual.innerHTML = "";
+    visual.appendChild(location.image);
+  } else if (fighting !== undefined) {
+    visual.innerHTML = "";
+    visual.appendChild(monsters[fighting].image)
+  } else {
+    visual.innerHTML = "";
+  }
 }
 
 function goTown() {
