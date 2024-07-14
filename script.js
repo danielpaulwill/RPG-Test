@@ -31,6 +31,9 @@ const fangedImg = document.createElement("img");
 fangedImg.src = "./images/fanged-beast-cropped.jpg";
 const dragonImg = document.createElement("img");
 dragonImg.src = "./images/dragon-cropped.jpg";
+const deathImg = document.createElement("img");
+deathImg.src = "./images/death-x-cropped.jpg";
+
 
 
 const weapons = [
@@ -228,6 +231,7 @@ function attack() {
   text.innerText = "The " + monsters[fighting].name + " attacks.";
   text.innerText += " You attack it with your " + weapons[currentWeapon].name + ".";
   health -= getMonsterAttackValue(monsters[fighting].level);
+  health = Math.max(health, 0); // Ensure health does not go below 0
   if (isMonsterHit()) {
     monsterHealth -= weapons[currentWeapon].power + Math.floor(Math.random() * xp) + 1;    
   } else {
@@ -249,6 +253,7 @@ function attack() {
     currentWeapon--;
   }
 }
+
 
 function getMonsterAttackValue(level) {
   const hit = (level * 5) - (Math.floor(Math.random() * xp));
@@ -274,7 +279,10 @@ function defeatMonster() {
 
 function lose() {
   update(locations[5]);
+  visual.innerHTML = ""; // Clear any existing image
+  visual.appendChild(deathImg); // Display the death image
 }
+
 
 function winGame() {
   update(locations[6]);
@@ -320,6 +328,7 @@ function pick(guess) {
   } else {
     text.innerText += "Wrong! You lose 10 health!";
     health -= 10;
+    health = Math.max(health, 0); // Ensure health does not go below 0
     healthText.innerText = health;
     if (health <= 0) {
       lose();
